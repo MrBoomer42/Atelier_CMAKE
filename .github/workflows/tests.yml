@@ -1,14 +1,34 @@
+name: Automatisation des tests
+
+on: push
+
+jobs:
+  Compilation:
+    runs-on: ubuntu-latest
+    steps:
+      
+name: Compilation et tests
+      run: |
+        last_directory=$(basename ${{ runner.workspace }})
+        git clone https://github.com/$%7B%7B github.repository }}.git
+        cd ./$last_directory
+        mkdir build
+        cd build
+        cmake ..
+        make
+        make test
+
   Test_Add:
     runs-on: ubuntu-latest
     needs: Compilation
     steps:
-      - name: Test fonction add
-        run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
-          mkdir build
-          cd build
-          cmake ..
-          make
-          ./src/calculator add 10 5
+      
+name: Test fonction add
+      run: |
+        last_directory=$(basename ${{ runner.workspace }})
+        git clone https://github.com/$%7B%7B github.repository }}.git
+        cd ./$last_directory
+        mkdir build
+        cd build
+        cmake ..
+        make./src/calculator add 10 5
