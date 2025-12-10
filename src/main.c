@@ -4,40 +4,51 @@
 #include "./../include/calculator.h"
 
 int main(int argc, char *argv[]){
-    if (argc == 4 || (argc == 3 && strcmp(argv[1], "car") == 0))
+    double r = 0;
+
+    // --- Gestion de la fonction "carré" (car) qui nécessite 3 arguments (prog, op, a) ---
+    if (argc == 3) {
+        char* op = argv[1];
+        char* a = argv[2];
+        
+        if (strcmp(op, "car") == 0) {
+            r = _car(atof(a)); // Appel de la nouvelle fonction _car
+            printf("%lf", r);
+        } else {
+            printf("Erreur de parametres");
+        }
+    }
+    // --- Gestion des opérations binaires (add, sub, mul, div) qui nécessitent 4 arguments (prog, op, a, b) ---
+    else if (argc == 4)
     {
         char* op = argv[1];
-        double r = 0;
-
+        char* a = argv[2];
+        char* b = argv[3];
+        
         if (strcmp(op, "add") == 0) {
-            r = _add(atof(argv[2]), atof(argv[3]));
+            r = _add(atof(a), atof(b));
+            printf("%lf",r);
         }
         else if (strcmp(op, "sub") == 0) {
-            r = _sub(atof(argv[2]), atof(argv[3]));
+            r = _sub(atof(a), atof(b));
+            printf("%lf",r);
         }
         else if (strcmp(op, "mul") == 0) {
-            r = _mul(atof(argv[2]), atof(argv[3]));
+            r = _mul(atof(a), atof(b));
+            printf("%lf",r);
         }
         else if (strcmp(op, "div") == 0) {
-            r = _div(atof(argv[2]), atof(argv[3]));
-        }
-        else if (strcmp(op, "car") == 0) {
-            // Ici l’opération n’a qu’un seul argument
-            r = _car(atof(argv[2]));
+            r = _div(atof(a), atof(b));
+            printf("%lf",r);
         }
         else {
-            printf("Erreur de paramètres");
-            return 0;
+            printf("Erreur de parametres");
         }
-
-        printf("%lf", r);
     }
+    // --- Gestion des cas où le nombre d'arguments est incorrect ---
     else {
-        printf("Erreur de paramètres");
+        printf("Erreur de parametres");
     }
 
     return 0;
 }
-
-
-		
