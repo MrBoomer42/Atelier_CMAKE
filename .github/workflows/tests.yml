@@ -1,13 +1,10 @@
 name: Automatisation des tests
-
 on: push
-
 jobs:
-
   Compilation:
     runs-on: ubuntu-latest
     steps:
-      - name: Récupération du dépôt
+      - name: Compilation
         run: |
           last_directory=$(basename ${{ runner.workspace }})
           git clone https://github.com/${{ github.repository }}.git
@@ -17,96 +14,3 @@ jobs:
           cmake ..
           make
           make test
-
-
-  Test_Add:
-    runs-on: ubuntu-latest
-    needs: Compilation
-    steps:
-      - name: Test add
-        run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
-          mkdir build
-          cd build
-          cmake ..
-          make
-          ./src/calculator add 10 5
-
-
-  Test_Sub:
-    runs-on: ubuntu-latest
-    needs: Compilation
-    steps:
-      - name: Test sub
-        run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
-          mkdir build
-          cd build
-          cmake ..
-          make
-          ./src/calculator sub 10 3
-
-
-  Test_Mul:
-    runs-on: ubuntu-latest
-    needs: Compilation
-    steps:
-      - name: Test mul
-        run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
-          mkdir build
-          cd build
-          cmake ..
-          make
-          ./src/calculator mul 3 7
-
-
-  Test_Div:
-    runs-on: ubuntu-latest
-    needs: Compilation
-    steps:
-      - name: Test div
-        run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
-          mkdir build
-          cd build
-          cmake ..
-          make
-          ./src/calculator div 10 2
-
-
-  Test_Car:
-    runs-on: ubuntu-latest
-    needs: Compilation
-    steps:
-      - name: Test car
-        run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
-          mkdir build
-          cd build
-          cmake ..
-          make
-          ./src/calculator car 5
-
-
-  Deployment:
-    runs-on: ubuntu-latest
-    needs:
-      - Test_Add
-      - Test_Sub
-      - Test_Mul
-      - Test_Div
-      - Test_Car
-    steps:
-      - name: Déploiement
-        run: echo "Déploiement de la solution"
