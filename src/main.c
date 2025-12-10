@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         a  = argv[2];
 
         if (strcmp(op, "car") == 0) {
-            r = car(atof(a));
+            r = _car(atof(a));
             printf("%lf", r);
         }
         else {
