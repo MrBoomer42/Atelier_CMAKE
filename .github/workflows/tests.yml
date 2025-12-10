@@ -19,7 +19,7 @@ jobs:
           make test
 
 
-Test_Add:
+  Test_Add:
     runs-on: ubuntu-latest
     needs: Compilation
     steps:
@@ -55,7 +55,6 @@ Test_Add:
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat build/report.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-
   Test_Sub:
     runs-on: ubuntu-latest
     needs: Compilation
