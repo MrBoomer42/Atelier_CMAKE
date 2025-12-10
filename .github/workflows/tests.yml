@@ -1,13 +1,9 @@
-# ... (votre Job Compilation existant ici)
-
-  Test_Add: # Nouveau Job de test pour l'addition
+  Test_Add:
     runs-on: ubuntu-latest
-    needs: Compilation # S'assure que la compilation est réussie avant de lancer le test
+    needs: Compilation
     steps:
       - name: Test fonction add
         run: |
-          # Ces lignes de clonage et compilation sont redondantes si la compilation a eu lieu avant
-          # Il est préférable de "télécharger" l'artefact compilé ou de simplement récupérer le code
           last_directory=$(basename ${{ runner.workspace }})
           git clone https://github.com/${{ github.repository }}.git
           cd ./$last_directory
@@ -15,6 +11,4 @@
           cd build
           cmake ..
           make
-          
-          # Exécution du test d'addition
           ./src/calculator add 10 5
